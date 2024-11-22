@@ -22,6 +22,8 @@ export default {
         rose: {
           500: "#F43F5E",
         },
+        "peach-fuzz": "#FEBE98",
+        "future-dusk": "#4F5277"
       },
     },
   },

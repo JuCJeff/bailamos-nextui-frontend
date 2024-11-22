@@ -1,5 +1,6 @@
 {
   "name": "bailamos-nextui-frontend",
+  "homepage": "https://jucjeff.github.io/bailamos-nextui-frontend",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -7,17 +8,23 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@nextui-org/react": "^2.4.8",
     "autoprefixer": "^10.4.20",
     "axios": "^1.7.7",
     "calendar-link": "^2.7.0",
+    "firebase": "^11.0.2",
     "framer-motion": "^11.11.17",
+    "gh-pages": "^6.2.0",
     "next-themes": "^0.4.3",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-firebaseui": "^6.0.0",
+    "react-hook-form": "^7.53.2",
     "react-jsx-parser": "^2.2.2",
     "react-router-dom": "^6.28.0"
   },
