@@ -10,6 +10,8 @@ export default {
   theme: {
     extend: {
       colors: {
+        primary: "#FEBE98",
+        secondary: "#4F5277",
         blue: {
           500: "#3B82F6",
         },
@@ -22,8 +24,6 @@ export default {
         rose: {
           500: "#F43F5E",
         },
-        "peach-fuzz": "#FEBE98",
-        "future-dusk": "#4F5277"
       },
     },
   },
