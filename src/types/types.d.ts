@@ -48,3 +48,13 @@ export type CalendarEvent = {
   duration: (string | number)[];
   location: string;
 };
+
+export type EventFormTemplateInputs = {
+  title: string;
+  date: Date;
+  startTime: string;
+  endTime: string;
+  location: string;
+  price: string;
+  music: Music[];
+};

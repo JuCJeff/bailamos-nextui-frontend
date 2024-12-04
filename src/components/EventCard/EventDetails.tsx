@@ -1,5 +1,4 @@
 import { Event } from "../../types";
-import JsxParser from "react-jsx-parser";
 
 interface EventDetailsProps {
   event: Event;
@@ -32,14 +31,6 @@ export default function EventDetails({ event }: Readonly<EventDetailsProps>) {
           <a href={event.location.url} target="_blank">
             {event.location.name}
           </a>
-        </div>
-        <div className="hidden justify-center py-2 w-auto min-w-[160px] sm:block">
-          <div className="overflow-hidden rounded-lg max-w-[540px]">
-            <JsxParser
-              jsx={event.location.embeddedMap}
-              className="w-full h-full aspect-w-16 aspect-h-9 hidden sm:block"
-            />
-          </div>
         </div>
       </div>
       <div className="flex-col pt-2">

@@ -1,3 +1,9 @@
-import type { CalendarEvent, Event, Music, Tag } from "./types";
+import type {
+  CalendarEvent,
+  Event,
+  EventFormTemplateInputs,
+  Music,
+  Tag,
+} from "./types";
 
-export { CalendarEvent, Event, Music, Tag };
+export { CalendarEvent, Event, EventFormTemplateInputs, Music, Tag };

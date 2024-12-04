@@ -1,8 +1,8 @@
 import { Progress } from "@nextui-org/react";
 
-import { findTagStyles } from "../../helper";
+import { findTagStyles } from "../../../helper";
 
-import type { Music } from "../../types";
+import type { Music } from "../../../types";
 
 interface PercentageProps {
   musicList: Music[];
@@ -10,7 +10,7 @@ interface PercentageProps {
 
 export default function Percentage({ musicList }: Readonly<PercentageProps>) {
   return (
-    <span className="flex justify-center items-center mt-4 px-0 h-auto w-full rounded-lg overflow-hidden sm:w-3/5">
+    <span className="flex justify-center items-center mt-4 px-0 h-auto w-full rounded-lg overflow-hidden">
       {musicList.map((music, index) => {
         const tagStyles = findTagStyles(music);
 
@@ -31,6 +31,7 @@ export default function Percentage({ musicList }: Readonly<PercentageProps>) {
             <Progress
               radius="none"
               value={100}
+              aria-label="Progress percentages"
               classNames={{
                 base: "max-w-md",
                 track: "drop-shadow-md border-transparent",

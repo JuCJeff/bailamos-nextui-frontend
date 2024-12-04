@@ -1,9 +1,9 @@
 import { Card, CardHeader, CardBody, Image } from "@nextui-org/react";
 
-import { MusicTag } from "../MusicTag";
-import { Percentage } from "../Percentage";
-import { EventDetails } from "../EventDetails";
-import { AddToCalendar } from "../AddToCalendar";
+import EventDetails from "./EventDetails";
+import { MusicTag } from "./MusicTag";
+import { Percentage } from "./Percentage";
+import { AddToCalendar } from "./AddToCalendar";
 
 import { Event } from "../../types";
 
@@ -13,25 +13,24 @@ interface EventCardProps {
 
 export default function EventCard({ event }: Readonly<EventCardProps>) {
   return (
-    <Card className="py-4" shadow="sm">
-      <CardHeader className="pb-0 pt-5 px-4 flex-col items-center">
+    <Card className="w-[560px] py-4 max-sm:w-full" shadow="sm">
+      <CardHeader className="flex-col items-center pb-0">
         <h2 className="font-bold">{event.title}</h2>
-        <small className="text-md mt-2 text-medium">
-          {event.location.city}
-        </small>
-        <small className="text-sm text-default-500">
+        <small className="text-medium mt-2">{event.location.city}</small>
+        <small className="text-small text-default-500">
           {event.location.state}
         </small>
+      </CardHeader>
+      <CardBody className="flex-col items-center py-2">
         <Image
           alt="Card background"
           className="mt-5 object-cover rounded-xl"
           src={event.img.src}
-          width={540}
         />
-      </CardHeader>
-      <CardBody className="flex-col items-center overflow-visible py-2">
-        <MusicTag musicList={event.music} />
-        <Percentage musicList={event.music} />
+        <div className="flex-col place-items-center">
+          <MusicTag musicList={event.music} />
+          <Percentage musicList={event.music} />
+        </div>
         <EventDetails event={event} />
         <AddToCalendar event={event} />
       </CardBody>

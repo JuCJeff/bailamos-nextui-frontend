@@ -1,7 +1,7 @@
 import { Chip } from "@nextui-org/react";
 
-import { findTagStyles } from "../../helper";
-import { Music } from "../../types";
+import { findTagStyles } from "../../../helper";
+import { Music } from "../../../types";
 
 interface MusicTagProps {
   musicList: Music[];
@@ -9,7 +9,7 @@ interface MusicTagProps {
 
 export default function MusicTag({ musicList }: Readonly<MusicTagProps>) {
   return (
-    <div className="flex">
+    <div className="flex flex-wrap justify-between">
       {musicList.map((music, index) => {
         const tagStyles = findTagStyles(music);
 
