@@ -1,3 +1,3 @@
-import { findTagStyles } from "./helper";
+import { findTagStyles, getFirebaseErrorMessage } from "./helper";
 
-export { findTagStyles };
+export { findTagStyles, getFirebaseErrorMessage };
