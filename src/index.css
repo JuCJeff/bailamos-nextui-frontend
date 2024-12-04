@@ -58,9 +58,6 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
 }
-button:hover {
-  border-color: var(--main-color);
-}
 button:focus,
 button:focus-visible {
   outline: 4px auto var(--main-color);
