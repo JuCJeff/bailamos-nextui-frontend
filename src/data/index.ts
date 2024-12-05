@@ -1,3 +1,3 @@
-import { events, tagStylesList } from "./eventData";
+import { events, musicList, tagStylesList } from "./eventData";
 
-export { events, tagStylesList };
+export { events, musicList, tagStylesList };
