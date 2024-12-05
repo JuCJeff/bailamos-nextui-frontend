@@ -1,10 +1,11 @@
 import { Input } from "@nextui-org/react";
+import { FiSearch } from "react-icons/fi";
 
 export default function SearchInput() {
   return (
     <Input
       classNames={{
-        base: "max-w-full",
+        base: "w-2/5 max-sm:w-full",
         mainWrapper: "h-full",
         input: "text-small",
         inputWrapper:
@@ -12,7 +13,7 @@ export default function SearchInput() {
       }}
       placeholder="Type to search for city..."
       size="sm"
-      //   startContent={<SearchIcon size={18} />}
+      startContent={<FiSearch size={18} />}
       type="search"
     />
   );
