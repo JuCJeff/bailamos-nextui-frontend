@@ -12,12 +12,14 @@ const useAuth = (): UseAuthResult => {
     const token = Cookies.get("auth_token");
 
     if (token) {
-      const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-        if (currentUser) {
-          setUser(currentUser);
-          console.log(currentUser); // Optionally log the current user
+      // Firebase auth state listener to track user login state
+      const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
+        if (firebaseUser) {
+          setUser(firebaseUser);
+          Cookies.set("auth_token", firebaseUser?.uid); // Store the user token
         } else {
           setUser(null);
+          Cookies.remove("auth_token"); // Remove the token on logout
         }
       });
 

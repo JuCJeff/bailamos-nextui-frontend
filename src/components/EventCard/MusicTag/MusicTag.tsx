@@ -9,7 +9,7 @@ interface MusicTagProps {
 
 export default function MusicTag({ musicList }: Readonly<MusicTagProps>) {
   return (
-    <div className="flex flex-wrap justify-between">
+    <div className="flex flex-wrap justify-center">
       {musicList.map((music, index) => {
         const tagStyles = findTagStyles(music);
 

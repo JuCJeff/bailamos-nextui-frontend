@@ -57,4 +57,5 @@ export type EventFormTemplateInputs = {
   location: string;
   price: string;
   music: Music[];
+  description: string;
 };
