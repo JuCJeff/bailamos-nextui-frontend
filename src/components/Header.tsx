@@ -64,7 +64,7 @@ export default function Header() {
       <NavbarContent className="hidden sm:flex gap-4">
         {userMenuItems.slice(0, 2).map(({ name, route }) => (
           <NavbarItem key={name}>
-            <Link href={route} aria-current="page">
+            <Link className="text-lg" href={route} aria-current="page">
               {name}
             </Link>
           </NavbarItem>
