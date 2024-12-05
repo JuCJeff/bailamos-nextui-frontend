@@ -1,3 +1,7 @@
+import { signOut } from "firebase/auth";
+import Cookies from "js-cookie";
+
+import { auth } from "../firebase";
 import { tagStylesList } from "../data";
 
 import type { Music } from "../types";
@@ -24,5 +28,19 @@ export const getFirebaseErrorMessage = (errorCode: string) => {
       return "Too many login attempts. Please try again later.";
     default:
       return "An error occurred. Please try again.";
+  }
+};
+
+export const handleLogout = async () => {
+  try {
+    // Sign out from Firebase Authentication
+    await signOut(auth);
+
+    // Remove the auth_token cookie
+    Cookies.remove("auth_token");
+
+    console.log("User logged out, cookie removed");
+  } catch (error) {
+    console.error("Error during logout:", error);
   }
 };
