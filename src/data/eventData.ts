@@ -77,12 +77,12 @@ export const events: Event[] = [
 ];
 
 export const musicList: string[] = [
-  "Bachata",
-  "Salsa",
-  "Merengue",
-  "Cumbia",
-  "Reggaeton",
-  "Others",
+  "bachata",
+  "salsa",
+  "merengue",
+  "cumbia",
+  "reggaeton",
+  "others",
 ];
 
 export const tagStylesList: Tag[] = [
