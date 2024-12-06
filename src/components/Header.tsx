@@ -56,7 +56,7 @@ export default function Header() {
           className="bg-secondary sm:hidden"
         />
         <NavbarBrand className="flex justify-start">
-          <h2 className="font-bold text-inherit">Bailamos</h2>
+          <p className="font-bold text-inherit">Bailamos</p>
         </NavbarBrand>
       </NavbarContent>
 
