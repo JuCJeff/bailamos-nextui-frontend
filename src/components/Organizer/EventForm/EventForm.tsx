@@ -1,21 +1,32 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { CheckboxGroup, Checkbox } from "@nextui-org/checkbox";
 import { Input, Textarea } from "@nextui-org/input";
 import { Button, DateInput, TimeInput } from "@nextui-org/react";
 import ImageUploading, { ImageListType } from "react-images-uploading";
 import { useForm, SubmitHandler } from "react-hook-form";
+import {
+  APIProvider,
+  ControlPosition,
+  MapControl,
+  AdvancedMarker,
+  Map,
+  useMap,
+  useAdvancedMarkerRef,
+} from "@vis.gl/react-google-maps";
 
-import { musicList } from "../../data";
+import { PlaceAutocomplete } from "./PlaceAutoComplete";
 
-import { EventFormTemplateInputs } from "../../types";
+import { musicList } from "../../../data";
+
+import { EventFormTemplateInputs } from "../../../types";
 
 interface Image {
   data_url: string; // Base64 image data
   file: File; // The image file
 }
 
-export default function Template() {
+export default function EventForm() {
   const {
     register,
     handleSubmit,
@@ -29,9 +40,16 @@ export default function Template() {
     reset();
   };
 
+  const API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
+
   const [images, setImages] = useState<Image[]>([]);
+
+  const [selectedPlace, setSelectedPlace] =
+    useState<google.maps.places.PlaceResult | null>(null);
+  const [markerRef, marker] = useAdvancedMarkerRef();
+
   const [isFreeEvent, setIsFreeEvent] = useState<boolean>(false);
-  const [selected, setSelected] = useState(["bachata", "salsa"]);
+  const [selectedMusic, setSelectedMusic] = useState(["bachata", "salsa"]);
 
   // Store the numeric input for each checkbox (e.g., bachata: 20, salsa: 30, etc.)
   const [additionalData, setAdditionalData] = useState<{
@@ -54,15 +72,6 @@ export default function Template() {
     setIsFreeEvent(!isFreeEvent);
   };
 
-  // Handle checkbox change (add/remove checkbox from selected list)
-  const handleCheckboxChange = (value: string) => {
-    setSelected((prevSelected) =>
-      prevSelected.includes(value)
-        ? prevSelected.filter((item) => item !== value)
-        : [...prevSelected, value]
-    );
-  };
-
   // Handle numeric input change
   const handleInputChange = (
     event: React.ChangeEvent<HTMLInputElement>,
@@ -73,6 +82,28 @@ export default function Template() {
       ...prevData,
       [value]: newValue,
     }));
+  };
+
+  // Todo: Move to a separate file
+  interface MapHandlerProps {
+    place: google.maps.places.PlaceResult | null;
+    marker: google.maps.marker.AdvancedMarkerElement | null;
+  }
+
+  // Todo: Move to a separate file
+  const MapHandler = ({ place, marker }: MapHandlerProps) => {
+    const map = useMap();
+
+    useEffect(() => {
+      if (!map || !place || !marker) return;
+
+      if (place.geometry?.viewport) {
+        map.fitBounds(place.geometry?.viewport);
+      }
+      marker.position = place.geometry?.location;
+    }, [map, place, marker]);
+
+    return null;
   };
 
   return (
@@ -123,7 +154,29 @@ export default function Template() {
           )}
         </ImageUploading>
       </div>
-      <Input type="text" label="Location" />
+
+      <APIProvider
+        apiKey={API_KEY}
+        solutionChannel="GMP_devsite_samples_v3_rgmautocomplete"
+      >
+        <Map
+          className="h-96 w-full"
+          mapId={"bf51a910020fa25a"}
+          defaultZoom={5}
+          defaultCenter={{ lat: 43.075, lng: -89.39 }}
+          gestureHandling={"greedy"}
+          disableDefaultUI={true}
+        >
+          <AdvancedMarker ref={markerRef} position={null} />
+        </Map>
+        <MapControl position={ControlPosition.TOP}>
+          <div className="mt-2">
+            <PlaceAutocomplete onPlaceSelect={setSelectedPlace} />
+          </div>
+        </MapControl>
+        <MapHandler place={selectedPlace} marker={marker} />
+      </APIProvider>
+
       <DateInput label={"Event date"} />
       <TimeInput label="Event Start Time" />
       <TimeInput label="Event End Time" />
@@ -148,8 +201,10 @@ export default function Template() {
       <CheckboxGroup
         label="Select music"
         color="secondary"
-        value={selected}
-        onValueChange={(newSelected) => setSelected(newSelected as string[])}
+        value={selectedMusic}
+        onValueChange={(newSelected) =>
+          setSelectedMusic(newSelected as string[])
+        }
       >
         {musicList.map((genre) => (
           <div className="flex" key={genre}>
@@ -158,7 +213,7 @@ export default function Template() {
                 {genre.charAt(0).toUpperCase() + genre.slice(1)}
               </Checkbox>
             </div>
-            {selected.includes(genre) && (
+            {selectedMusic.includes(genre) && (
               <Input
                 className="ms-4"
                 variant="bordered"

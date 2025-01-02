@@ -1,5 +1,5 @@
 import Dashboard from "./Dashboard";
 import Profile from "./Profile";
-import Template from "./Template";
+import { EventForm } from "./EventForm";
 
-export { Dashboard, Profile, Template };
+export { Dashboard, Profile, EventForm };

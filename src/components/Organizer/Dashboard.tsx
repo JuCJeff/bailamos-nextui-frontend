@@ -4,7 +4,7 @@ import useAuth from "../../hooks/authHooks";
 
 import { LoginForms } from "../LoginForm";
 import Profile from "./Profile";
-import Template from "./Template";
+import { EventForm } from "./EventForm";
 
 export default function Dashboard() {
   const user = useAuth();
@@ -20,12 +20,12 @@ export default function Dashboard() {
           </Tab>
           <Tab
             className="flex justify-center"
-            key="templates"
-            title="Templates"
+            key="event-form"
+            title="Event Form"
           >
             <Card className="w-[540px] px-5 max-sm:w-full">
               <CardBody>
-                <Template />
+                <EventForm />
               </CardBody>
             </Card>
           </Tab>
