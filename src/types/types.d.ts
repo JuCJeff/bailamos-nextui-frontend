@@ -58,4 +58,5 @@ export type EventFormTemplateInputs = {
   price: string;
   music: Music[];
   description: string;
+  isFreeEvent: boolean;
 };
